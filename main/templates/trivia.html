@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia</title>
+</head>
+<body>
+    <form  method="post">
+        {% csrf_token %}
+        <p> {{question.question}} </p>
+        <button type="button" class="option-btn" data-value="1">{{question.option1}}</button>
+        <button type="button" class="option-btn" data-value="2">{{question.option2}}</button>
+        <button type="button" class="option-btn" data-value="3">{{question.option3}}</button>
+        <button type="button" class="option-btn" data-value="4">{{question.option4}}</button>
+        <button type="submit">Submit</button>
+    </form>
+    <script src="{% static "trivia.js" %}"></script>
+</body>
+</html>
