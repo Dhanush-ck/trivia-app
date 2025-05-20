@@ -8,14 +8,13 @@
     <title>Trivia</title>
 </head>
 <body>
-    <form  method="post">
+    <form action="{% url "check" %}" method="post" id="submission-form">
         {% csrf_token %}
         <p> {{question.question}} </p>
-        <button type="button" class="option-btn" data-value="1">{{question.option1}}</button>
-        <button type="button" class="option-btn" data-value="2">{{question.option2}}</button>
-        <button type="button" class="option-btn" data-value="3">{{question.option3}}</button>
-        <button type="button" class="option-btn" data-value="4">{{question.option4}}</button>
-        <button type="submit">Submit</button>
+        <button type="submit" name="option-btn" value="1">{{question.option1}}</button>
+        <button type="submit" name="option-btn" value="2">{{question.option2}}</button>
+        <button type="submit" name="option-btn" value="3">{{question.option3}}</button>
+        <button type="submit" name="option-btn" value="4">{{question.option4}}</button>
     </form>
     <script src="{% static "trivia.js" %}"></script>
 </body>
