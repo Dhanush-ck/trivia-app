@@ -10,6 +10,10 @@
         {% csrf_token %}
         {{form.name}}
         <br>
+        <input type="radio" name="level" value='easy' checked>Easy 
+        <input type="radio" name="level" value='medium'>Medium 
+        <input type="radio" name="level" value='hard'>Hard 
+        <br>
         <button type="submit">Start</button>
     </form>
 </body>
