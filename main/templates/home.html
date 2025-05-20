@@ -6,9 +6,9 @@
     <title>Home</title>
 </head>
 <body>
-    <form method="post">
+    <form method="POST">
         {% csrf_token %}
-        <input type="text" name="name" placeholder="Enter your name">
+        {{form.name}}
         <br>
         <button type="submit">Start</button>
     </form>
