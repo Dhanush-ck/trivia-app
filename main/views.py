@@ -1,31 +1,68 @@
 from django.shortcuts import render, redirect
 from . models import Question
 import random
+from . forms import NameForm
 
 # Create your views here.
 
 def home(request):
     if request.method == 'POST':
-        username = request.POST.get('name')
-        request.session['username'] = username
-        return redirect('start')
-    return render(request, 'home.html')
+        form = NameForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['name']
+            request.session['username'] = username
+            return redirect('start')
+        else:
+            return render(request, 'home.html', {
+                'form': form
+            })
+    form = NameForm()
+    return render(request, 'home.html', {
+        'form': form
+    })
 
 def start_trivia(request):
-    request.session['used_ids'] = []
+    request.session['used_questions'] = []
+    request.session['score'] = 0
+    request.session['count'] = 0
     return redirect('trivia')
 
 def trivia_page(request):
-    # name = request.session.get('username')
-    used_ids = request.session.get('used_ids', [])
 
-    available_ids = Question.objects.exclude(id__in=used_ids)
-    
-    question = random.choice(list(available_ids))
+    used_ids = request.session['used_questions']
+    remaining_questions = Question.objects.exclude(id__in=used_ids)
+    count = request.session['count']
 
-    used_ids.append(question.id)
-    request.session['used_ids'] = used_ids
+    if remaining_questions.exists() and count <= 10:
+        question = random.choice(list(remaining_questions))
+        request.session['current_question_id'] = question.id
+        used_ids.append(question.id)
+        request.session['used_questions'] = used_ids
+        return render(request, 'trivia.html', {'question': question})
+    else :
+        name = request.session.get('username')
+        score = request.session['score']
+        return render(request, 'result.html', {
+            'score': score,
+            'name': name,
+        })
+
+def check_answer(request):
+    if request.method == 'POST':
+        selected_option = int(request.POST.get('option-btn'))
+        current_question_id = request.session.get('current_question_id')
+
+        question = Question.objects.get(id=current_question_id)
+
+        correct = (selected_option == question.correct_option)
+
+        if correct :
+            request.session['score'] = request.session.get('score', 0) + 1
+        
+        request.session['count'] = request.session.get('score', 0) + 1
+
+        return redirect('trivia')
     
-    return render(request, 'trivia.html', {
-        'question': question,
-    })
+def restart_trivia(request):
+    request.session.flush()
+    return redirect('home')
