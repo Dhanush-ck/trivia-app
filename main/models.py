@@ -9,6 +9,7 @@ class Question(models.Model):
     option3 = models.CharField(max_length=100)
     option4 = models.CharField(max_length=100)
     correct_option = models.IntegerField()
+    difficulty = models.CharField(max_length=10)
 
 
 def __str__(self):
