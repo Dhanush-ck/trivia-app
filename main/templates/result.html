@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<body>
+    Your name is {{name}}
+    <br>
+    Your score is {{score}} / 10
+
+    <form action="{% url 'restart' %}" method="post">
+        {% csrf_token %}
+        <button type='submit'>Restart</button>
+    </form>
+</body>
+</html>
