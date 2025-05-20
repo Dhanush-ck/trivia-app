@@ -10,7 +10,9 @@ def home(request):
         form = NameForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['name']
+            level = request.POST.get('level')
             request.session['username'] = username
+            request.session['level'] = level
             return redirect('start')
         else:
             return render(request, 'home.html', {
@@ -30,10 +32,11 @@ def start_trivia(request):
 def trivia_page(request):
 
     used_ids = request.session['used_questions']
-    remaining_questions = Question.objects.exclude(id__in=used_ids)
+    level = request.session['level']
+    remaining_questions = Question.objects.filter(difficulty=level).exclude(id__in=used_ids)
     count = request.session['count']
 
-    if remaining_questions.exists() and count <= 10:
+    if remaining_questions.exists() and count < 10:
         question = random.choice(list(remaining_questions))
         request.session['current_question_id'] = question.id
         used_ids.append(question.id)
@@ -59,7 +62,7 @@ def check_answer(request):
         if correct :
             request.session['score'] = request.session.get('score', 0) + 1
         
-        request.session['count'] = request.session.get('score', 0) + 1
+        request.session['count'] = request.session.get('count', 0) + 1
 
         return redirect('trivia')
     
