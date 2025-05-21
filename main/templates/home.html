@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Signup</title>
 </head>
 <body>
     <form method="POST">
         {% csrf_token %}
         {{form.name}}
         <br>
-        <input type="radio" name="level" value='easy' checked>Easy 
-        <input type="radio" name="level" value='medium'>Medium 
-        <input type="radio" name="level" value='hard'>Hard 
+        {% if form.name.errors %}
+            <div style="color: red;">
+                {{form.name.errors.0}}
+            </div>
+        {% endif %}
+        {{form.password}}
         <br>
-        <button type="submit">Start</button>
+        <a href="{% url "login" %}">Already a user ?</a> <br>
+        <br>
+        <button type="submit">Login</button>
     </form>
 </body>
 </html>
