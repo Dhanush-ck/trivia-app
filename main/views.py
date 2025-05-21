@@ -1,27 +1,59 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 from . models import Question
 import random
 from . forms import NameForm
-
+from . forms import UserForm
 # Create your views here.
+
+def welcome(request):
+    if request.method == 'POST':
+        return redirect('signup')
+    return render(request, 'welcome.html')
 
 def home(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['name']
-            level = request.POST.get('level')
-            request.session['username'] = username
-            request.session['level'] = level
-            return redirect('start')
+            password = form.cleaned_data['password']
+            if not User.objects.filter(username=username).exists():
+                    User.objects.create_user(username=username, password=password)
+                    return redirect('dashboard')
         else:
             return render(request, 'home.html', {
-                'form': form
-            })
+            'form': form
+        })
     form = NameForm()
     return render(request, 'home.html', {
         'form': form
     })
+
+def user(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            return redirect('dashboard')
+        else:
+            return render(request, 'user.html', {
+        'form': form
+    })
+
+    form = UserForm()
+    return render(request, 'user.html', {
+        'form': form
+    })
+        
+def dashboard(request):
+    if request.method == 'POST':
+        level = request.POST.get('level')
+        request.session['level'] = level
+        return redirect('start')
+    return render(request, 'dashboard.html')
 
 def start_trivia(request):
     request.session['used_questions'] = []
@@ -68,4 +100,4 @@ def check_answer(request):
     
 def restart_trivia(request):
     request.session.flush()
-    return redirect('home')
+    return redirect('dashboard')
