@@ -18,7 +18,8 @@
             </div>
         {% endif %}
         {{form.password}}
-        <button type="submit">Login</button>
+        <a href="{% url "reset" %}">Forgot password?</a>
+        <button type="submit">Sign in</button>
     </form>
 </body>
 </html>
