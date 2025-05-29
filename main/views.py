@@ -8,6 +8,9 @@ from . models import Question
 import random
 from . forms import NameForm
 from . forms import UserForm
+from . forms import ResetForm
+from . forms import ChangePasswordForm
+
 # Create your views here.
 
 def welcome(request):
@@ -15,7 +18,7 @@ def welcome(request):
         return redirect('signup')
     return render(request, 'welcome.html')
 
-def home(request):
+def signup(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
         if form.is_valid():
@@ -23,29 +26,81 @@ def home(request):
             password = form.cleaned_data['password']
             if not User.objects.filter(username=username).exists():
                     User.objects.create_user(username=username, password=password)
+
+                    question = form.cleaned_data['question']
+                    answer = form.cleaned_data['answer']
+                    user = User.objects.get(username=username)
+                    user.profile.question = question
+                    user.profile.answer = answer
+                    user.profile.save()
+                    request.session['username'] = username
                     return redirect('dashboard')
         else:
-            return render(request, 'home.html', {
+            return render(request, 'signup.html', {
             'form': form
         })
     form = NameForm()
-    return render(request, 'home.html', {
+    return render(request, 'signup.html', {
         'form': form
     })
 
-def user(request):
+def signin(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
+            username = form.cleaned_data['name']
+            request.session['username'] = username
             return redirect('dashboard')
         else:
-            return render(request, 'user.html', {
+            return render(request, 'signin.html', {
         'form': form
     })
 
     form = UserForm()
-    return render(request, 'user.html', {
+    return render(request, 'signin.html', {
         'form': form
+    })
+
+def reset_password(request):
+    if request.method == 'POST':
+        form = ResetForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['name']
+            request.session['username'] = username
+            return redirect('change')
+        else:
+            return render(request, 'reset.html', {
+                'form': form,
+            })
+            
+    form = ResetForm()
+    return render(request, 'reset.html', {
+        'form': form,
+    })
+
+def change_password(request):
+    username = request.session['username']
+    user = User.objects.get(username=username)
+    question = user.profile.question
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            answer = form.cleaned_data['answer']
+            if answer == user.profile.answer:
+                new_password = form.cleaned_data['password']
+                user.set_password(new_password)
+                user.save()
+                return redirect('signin')
+            else:
+                form.add_error('answer', 'Answer Incorrect')
+                return render(request, 'change.html', {
+                    'form': form,
+                    'question': question,
+                })
+    form = ChangePasswordForm()
+    return render(request, 'change.html', {
+        'form': form,
+        'question': question,
     })
         
 def dashboard(request):
@@ -75,12 +130,7 @@ def trivia_page(request):
         request.session['used_questions'] = used_ids
         return render(request, 'trivia.html', {'question': question})
     else :
-        name = request.session.get('username')
-        score = request.session['score']
-        return render(request, 'result.html', {
-            'score': score,
-            'name': name,
-        })
+        return redirect('result')
 
 def check_answer(request):
     if request.method == 'POST':
@@ -97,6 +147,19 @@ def check_answer(request):
         request.session['count'] = request.session.get('count', 0) + 1
 
         return redirect('trivia')
+    
+def result(request):
+    name = request.session['username']
+    score = request.session['score']
+    user = User.objects.get(username=name)
+    user_score = user.profile.score
+    if score > user_score:
+        user.profile.score = score
+        user.profile.save()
+    return render(request, 'result.html', {
+        'score': score,
+        'name': name,
+        })
     
 def restart_trivia(request):
     request.session.flush()
