@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 class NameForm(forms.Form):
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Enter your name'}))
     password = forms.CharField(widget=forms.PasswordInput())
+    question = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Enter the question'}))
+    answer = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Enter the answer'}))
 
     def clean_name(self):
         name = self.cleaned_data['name']
@@ -26,3 +28,16 @@ class UserForm(forms.Form):
         else:
             raise forms.ValidationError('User not found')
         return cleaned_data
+    
+class ResetForm(forms.Form):
+    name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Enter your name'}))
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if not User.objects.filter(username=name).exists():
+            raise forms.ValidationError("This username doesn't exists")
+        return name
+    
+class ChangePasswordForm(forms.Form):
+    answer = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Enter the answer'}))
+    password = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder': 'Enter new password'}))
