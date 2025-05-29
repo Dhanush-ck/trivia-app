@@ -18,10 +18,10 @@ class Question(models.Model):
         return self.name
 
 class Profile(models.Model):
-    # user = models.CharField(max_length=200)
-    # password = models.CharField(max_length=16)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    score = models.IntegerField(default=0)  
+    score = models.IntegerField(default=0)
+    question = models.CharField(max_length=200)
+    answer = models.CharField(max_length=100)
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
