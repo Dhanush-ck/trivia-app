@@ -17,9 +17,15 @@
         {% endif %}
         {{form.password}}
         <br>
-        <a href="{% url "login" %}">Already a user ?</a> <br>
+        Question for password reset
         <br>
-        <button type="submit">Login</button>
+        {{form.question}}
+        <br>
+        {{form.answer}}
+        <br>
+        <a href="{% url "signin" %}">Already a user ?</a> <br>
+        <br>
+        <button type="submit">Signup</button>
     </form>
 </body>
 </html>
