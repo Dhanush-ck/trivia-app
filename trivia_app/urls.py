@@ -27,7 +27,11 @@ urlpatterns = [
     path('check/', views.check_answer, name='check'),
     path('restart/', views.restart_trivia, name='restart'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('leaderboard/', views.leaderboard, name='leaderboard'),
+    path('levels', views.leaderboard_level, name='levels'),
+    path('level/', views.level, name='level'),
     path('signin/', views.signin, name='signin'),
+    path('result', views.result, name='result'),
     path('reset/', views.reset_password, name='reset'),
     path('change/', views.change_password, name='change')
 ]
