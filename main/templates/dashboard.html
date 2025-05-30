@@ -6,12 +6,13 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <input type="radio" name="level" value='easy' checked>Easy 
-        <input type="radio" name="level" value='medium'>Medium 
-        <input type="radio" name="level" value='hard'>Hard
-        <button type="submit">Start</button>
-    </form>
+    {{username}}
+    <br>
+    <a href="{% url "levels" %}">
+        <button>Leaderboard</button>
+    </a>
+    <a href="{% url "level" %}">
+        <button>Levels</button>
+    </a>
 </body>
 </html>
