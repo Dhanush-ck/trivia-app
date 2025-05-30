@@ -102,13 +102,40 @@ def change_password(request):
         'form': form,
         'question': question,
     })
-        
+
 def dashboard(request):
+    username = request.session['username']
+    return render(request, 'dashboard.html', {
+        'username':username,
+    })
+
+def leaderboard_level(request):
+    if request.method == 'POST':
+        level = request.POST.get('level')
+        request.session['leaderboard_level'] = level
+        return redirect('leaderboard')
+    return render(request, 'leaderboard_level.html')
+
+def leaderboard(request):
+    level = request.session['leaderboard_level']
+    current_level = level + '_score'
+    users = []
+    for user in User.objects.all():
+        users.append({
+            "name" : user.username,
+            "score": getattr(user.profile, current_level),
+        })
+    users = sorted(users, key=lambda x:x['score'], reverse=True)
+    return render(request, 'leaderboard.html', {
+        'users' : users,
+    })
+        
+def level(request):
     if request.method == 'POST':
         level = request.POST.get('level')
         request.session['level'] = level
         return redirect('start')
-    return render(request, 'dashboard.html')
+    return render(request, 'level.html')
 
 def start_trivia(request):
     request.session['used_questions'] = []
@@ -152,9 +179,11 @@ def result(request):
     name = request.session['username']
     score = request.session['score']
     user = User.objects.get(username=name)
-    user_score = user.profile.score
+    level = request.session['level']
+    current_score = level + '_score'
+    user_score = getattr(user.profile, current_score)
     if score > user_score:
-        user.profile.score = score
+        setattr(user.profile, current_score, score)
         user.profile.save()
     return render(request, 'result.html', {
         'score': score,
@@ -162,5 +191,5 @@ def result(request):
         })
     
 def restart_trivia(request):
-    request.session.flush()
+    # request.session.flush()
     return redirect('dashboard')
