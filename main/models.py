@@ -19,7 +19,9 @@ class Question(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    score = models.IntegerField(default=0)
+    easy_score = models.IntegerField(default=0)
+    medium_score = models.IntegerField(default=0)
+    hard_score = models.IntegerField(default=0)
     question = models.CharField(max_length=200)
     answer = models.CharField(max_length=100)
 
