@@ -1,0 +1,42 @@
+* {
+    border: none;
+    margin: 0;
+    border: none;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8f0fff;
+}
+
+.form {
+    background-color: white;
+    width: 20rem;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    border-radius: 40px;
+}
+
+.submit-button {
+    background-color: white;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    width: 7rem;
+    transition: 0.2s;
+
+    &:hover {
+        background-color: black;
+        color: white;
+        /* border: solid 1px white; */
+    }
+}
