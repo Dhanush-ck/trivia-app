@@ -1,16 +1,21 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/welcome.css' %}">
     <title>Trivia</title>
 </head>
 <body>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <h1>Trivia</h1>
-        <h2>App</h2>
-        <button type="submit">Play</button>
-    </form>
+    <div class="container">
+        <form action="" method="POST" class="form">
+            {% csrf_token %}
+            <h1>Trivia</h1>
+            <h2>App</h2>
+            <button type="submit" class="submit-button">Play</button>
+        </form>
+    </div>
 </body>
 </html>
