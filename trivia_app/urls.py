@@ -21,17 +21,17 @@ from main import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.welcome, name="welcome"),
-    path('signup/', views.signup, name="signup"),
-    path('start/ ', views.start_trivia, name='start'),
-    path('trivia/', views.trivia_page, name='trivia'),
-    path('check/', views.check_answer, name='check'),
-    path('restart/', views.restart_trivia, name='restart'),
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('leaderboard/', views.leaderboard, name='leaderboard'),
+    path('signup', views.signup, name="signup"),
+    path('start ', views.start_trivia, name='start'),
+    path('trivia', views.trivia_page, name='trivia'),
+    path('check', views.check_answer, name='check'),
+    path('restart', views.restart_trivia, name='restart'),
+    path('dashboard', views.dashboard, name='dashboard'),
+    path('leaderboard', views.leaderboard, name='leaderboard'),
     path('levels', views.leaderboard_level, name='levels'),
-    path('level/', views.level, name='level'),
-    path('signin/', views.signin, name='signin'),
+    path('level', views.level, name='level'),
+    path('signin', views.signin, name='signin'),
     path('result', views.result, name='result'),
-    path('reset/', views.reset_password, name='reset'),
-    path('change/', views.change_password, name='change')
+    path('reset', views.reset_password, name='reset'),
+    path('change', views.change_password, name='change')
 ]
