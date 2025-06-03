@@ -13,6 +13,7 @@
     <div class="container">
         <form method="POST" class="form">
             {% csrf_token %}
+            <span class="header">Create account</span>
             <div class="input">
                 <span>
                     Name : 
@@ -41,10 +42,10 @@
             </div>
 
             <span class="message">
-                Question for password reset!
+                Question for password reset !
             </span>
-            <a href="{% url "signin" %}">Already a user ?</a> <br>
-            <button type="submit">Signup</button>
+            <a href="{% url "signin" %}">Already a user ?</a>
+            <button type="submit" class="submit-button">Signup</button>
         </form>
     </div>
 </body>
