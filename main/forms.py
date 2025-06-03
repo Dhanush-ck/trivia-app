@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class NameForm(forms.Form):
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Enter your name'}))
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter the password'}))
     question = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Enter the question'}))
     answer = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Enter the answer'}))
 
