@@ -15,7 +15,7 @@ class NameForm(forms.Form):
     
 class UserForm(forms.Form):
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Enter your name'}))
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Enter your password'}))
 
     def clean(self):
         cleaned_data = super().clean()
