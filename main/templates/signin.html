@@ -1,25 +1,38 @@
+{%load static%}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
     <title>Welcome Back</title>
 </head>
 <body>
-    <form method="post">
-        {% csrf_token %}
-        {{form.name}}
-        <br>
-        {% if form.non_field_errors %}
-            <div style="color: red;">
-            {% for error in form.non_field_errors %}
-                {{ error }}
-            {% endfor %}
+    <div class="container">
+        <form method="post" class="form">
+            {% csrf_token %}
+            <div class="input">
+                <span>
+                    Name :
+                </span>
+                {{form.name}}
+                {% if form.non_field_errors %}
+                <div style="color: red;" class="error">
+                    {% for error in form.non_field_errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <span>
+                    Password :
+                </span>
+                {{form.password}}
             </div>
-        {% endif %}
-        {{form.password}}
-        <a href="{% url "reset" %}">Forgot password?</a>
-        <button type="submit">Sign in</button>
-    </form>
+            <a href="{% url "reset" %}">Forgot password?</a>
+            <button type="submit" class="submit-button">Sign in</button>
+        </form>
+    </div>
 </body>
 </html>
