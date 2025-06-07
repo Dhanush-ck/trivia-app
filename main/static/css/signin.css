@@ -76,3 +76,92 @@ a {
         color: white;
     }
 }
+
+
+@media only screen and (max-width: 400px) {
+    .form {
+        height: 23rem;
+        width: 18rem;
+        font-size: 15px;
+    }
+
+    #id_name, #id_password {
+        font-size: 14px;
+    }
+
+    .message, .error {
+        font-size: 13px;
+    }
+
+    .submit-button {
+        padding: 5px;
+        font-size: 15px;
+        width: 5rem;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 600px) {
+    .form {
+        height: 25rem;
+        width: 20rem;
+        font-size: 18px;
+    }
+
+    #id_name, #id_password {
+        font-size: 15px;
+        width: 10rem;
+    }
+
+    .message, .error {
+        font-size: 15px;
+    }
+
+    .submit-button {
+        padding: 5px;
+        font-size: 18px;
+        width: 6rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .form {
+        height: 35rem;
+        width: 30rem;
+        font-size: 24px;
+    }
+
+    #id_name, #id_password {
+        font-size: 20px;
+    }
+
+    .error, .message, a {
+        font-size: 18px;
+    }
+
+    .submit-button {
+        width: 8rem;
+        font-size: 24px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) and (min-height: 700px) {
+    .form {
+        height: 40rem;
+        width: 35rem;
+        font-size: 28px;
+    }
+
+    #id_name, #id_password {
+        font-size: 24px;
+    }
+
+    .error, .message, a {
+        font-size: 22px;
+    }
+
+    .submit-button {
+        width: 10rem;
+        font-size: 28px;
+        margin: 20px 0 0 0 ;
+    }
+}
