@@ -12,13 +12,17 @@
 <body>
     <div class="container">
         <div class="container-element">
-            Hello, {{username}}
-            <br>
+            <h1>
+                Hello, {{username}}
+            </h1>
             <a href="{% url "level" %}">
                 <button class="button">Play</button>
             </a>
             <a href="{% url "levels" %}">
                 <button class="button">Leaderboard</button>
+            </a>
+            <a href="{% url "logout" %}" class="logout">
+                <span>Logout</span>
             </a>
         </div>
     </div>
