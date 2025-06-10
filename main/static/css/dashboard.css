@@ -28,6 +28,10 @@
     gap: 4px;
 }
 
+h1 {
+    font-size: 50px;
+}
+
 .button {
     background-color: white;
     border: solid 1px black;
@@ -35,7 +39,7 @@
     padding: 10px;
     margin: 10px 0 0 0;
     font-size: 20px;
-    width: 7rem;
+    width: 10rem;
     transition: 0.2s;
     box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
     
@@ -43,5 +47,22 @@
         background-color: black;
         box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.4);
         color: white;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+.logout {
+    padding: 20px 0 0 0;
+}
+
+.logout span {
+    color: red;
+    transition: 0.2s;
+    margin: 20px;
+    &:hover {
+        text-decoration: underline;
     }
 }
