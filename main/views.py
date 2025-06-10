@@ -120,7 +120,7 @@ def leaderboard(request):
     level = request.session['leaderboard_level']
     current_level = level + '_score'
     users = []
-    for user in User.objects.all():
+    for user in User.objects.all().exclude(username="admin"):
         users.append({
             "name" : user.username,
             "score": getattr(user.profile, current_level),
@@ -193,3 +193,7 @@ def result(request):
 def restart_trivia(request):
     # request.session.flush()
     return redirect('dashboard')
+
+def logout(request):
+    request.session.flush()
+    return redirect('welcome')
