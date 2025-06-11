@@ -1,15 +1,33 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}">
     <title>Leaderboard</title>
 </head>
 <body>
-    <ol>
-        {% for user in users %}
-            <li> {{user.name}} - {{user.score}} </li>
-        {% endfor %}
-    </ol>
+    <div class="container">
+        <div class="container-element">
+            <h1>Leaderboard</h1>
+            <div class="grid-container">
+                <table class="score-grid">
+                    <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                    </tr>
+                    {% for user in users %}
+                    <tr>
+                        <td> {{user.name}}</td>
+                        <td>{{user.score}} </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
