@@ -66,3 +66,74 @@ a {
         text-decoration: underline;
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .container-element {
+        height: 23rem;
+        width: 18rem;
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .button {
+        padding: 8px;
+        font-size: 18px;
+        width: 8rem;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 600px) {
+    .container-element {
+        height: 25rem;
+        width: 20rem;
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    .button {
+        padding: 8px;
+        font-size: 18px;
+        width: 8rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .container-element {
+        height: 35rem;
+        width: 30rem;
+        font-size: 24px;
+    }
+
+    h1 {
+        font-size: 58px;
+    }
+
+    .button {
+        width: 12rem;
+        font-size: 26px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) and (min-height: 700px) {
+    .container-element {
+        height: 40rem;
+        width: 35rem;
+        font-size: 28px;
+    }
+
+    h1 {
+        font-size: 72px;
+    }
+
+    .button {
+        width: 16rem;
+        font-size: 30px;
+        margin: 20px 0 0 0 ;
+    }
+}
