@@ -14,18 +14,18 @@
         <div class="container-element">
             <h1>Leaderboard</h1>
             <div class="grid-container">
-                <table class="score-grid">
-                    <tr>
-                        <th>Name</th>
-                        <th>Score</th>
-                    </tr>
+                <div class="score-grid">
+                    <div class="score-header">
+                        <span>Name</span>
+                        <span>Score</span>
+                    </div>
                     {% for user in users %}
-                    <tr>
-                        <td> {{user.name}}</td>
-                        <td>{{user.score}} </td>
-                    </tr>
+                    <div class="score-content">
+                        <span> {{user.name}}</span>
+                        <span>{{user.score}} </span>
+                    </div>
                     {% endfor %}
-                </table>
+                </div>
             </div>
         </div>
     </div>
