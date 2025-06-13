@@ -1,17 +1,30 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/level.css' %}">
     <title>Level</title>
 </head>
 <body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <input type="radio" name="level" value='easy' checked>Easy 
-        <input type="radio" name="level" value='medium'>Medium 
-        <input type="radio" name="level" value='hard'>Hard
-        <button type="submit">Start</button>
-    </form>
+    <div class="container">
+        <form action="" method="post" class="form">
+            <h1>Choose level</h1>
+            {% csrf_token %}
+            <span class="easy-button level-button checked">Easy</span>
+            <span class="medium-button level-button">Medium</span>
+            <span class="hard-button level-button">Hard</span>
+
+            <input type="radio" name="level" value='easy' class="easy level-radio-button" checked>
+            <input type="radio" name="level" value='medium' class="medium level-radio-button"> 
+            <input type="radio" name="level" value='hard' class="hard level-radio-button">
+            
+            <button type="submit" class="button">Start</button>
+        </form>
+    </div>
+    <script src=" {% static "js/level.js" %} "></script>
 </body>
 </html>
