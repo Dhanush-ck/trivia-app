@@ -42,6 +42,7 @@ h1 {
     width: 10rem;
     transition: 0.2s;
     box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+    cursor: pointer;
     
     &:hover {
         background-color: black;
