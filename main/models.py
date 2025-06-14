@@ -14,9 +14,6 @@ class Question(models.Model):
     correct_option = models.IntegerField()
     difficulty = models.CharField(max_length=10)
 
-    def __str__(self):
-        return self.name
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     easy_score = models.IntegerField(default=0)
