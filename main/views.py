@@ -88,6 +88,12 @@ def change_password(request):
             answer = form.cleaned_data['answer']
             if answer == user.profile.answer:
                 new_password = form.cleaned_data['password']
+                if user.check_password(new_password):
+                    form.add_error('password', 'Same Password')
+                    return render(request, 'change.html', {
+                        'form': form,
+                        'question': question,
+                    })
                 user.set_password(new_password)
                 user.save()
                 return redirect('signin')
