@@ -20,6 +20,12 @@
         <br>
         {{form.password}}
         <br>
+        {% if form.password.errors %}
+            <div style="color: red;">
+                {{form.password.errors.0}}
+            </div>
+        {% endif %}
+        <br>
         <button type="submit">Submit</button>
     </form>
 </body>
