@@ -193,7 +193,7 @@ def result(request):
         user.profile.save()
     return render(request, 'result.html', {
         'score': score,
-        'name': name,
+        'level': level,
         })
     
 def restart_trivia(request):
