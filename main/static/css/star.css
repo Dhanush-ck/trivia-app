@@ -14,8 +14,7 @@
     height: 8px;
     background: white;
     rotate: 75deg;
-    /* border-radius: 50%; */
-    opacity: 0;
+    opacity: 0.2;
     animation: twinkle 2s infinite ease-in-out;
 }
 
