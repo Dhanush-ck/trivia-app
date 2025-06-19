@@ -7,10 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/star.css' %}">
     <title>Leaderboard</title>
 </head>
 <body>
     <div class="container">
+        {% for i in "****************" %}
+            <div class="star"></div>
+        {% endfor %}
         <div class="container-element">
             <h1>Leaderboard</h1>
             <div class="grid-container">
