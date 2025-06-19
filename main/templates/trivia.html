@@ -7,10 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static "css/trivia.css" %}">
+    <link rel="stylesheet" href="{% static 'css/star.css' %}">
     <title>Trivia</title>
 </head>
 <body>
     <div class="container">
+        {% for i in "****************" %}
+            <div class="star"></div>
+        {% endfor %}
+        
         <form action="{% url "check" %}" method="post" id="submission-form" class="form">
             {% csrf_token %}
             <p> {{question.question}} </p>
