@@ -35,4 +35,5 @@ urlpatterns = [
     path('reset', views.reset_password, name='reset'),
     path('change', views.change_password, name='change'),
     path('logout', views.logout, name="logout"),
+    path('chat', views.chat_view, name="chat"),
 ]
