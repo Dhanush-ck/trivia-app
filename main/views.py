@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth import authenticate, login
+# from django.contrib import messages
+# from django.contrib.auth.decorators import login_required
+from .gemini import generate_response
 from django.contrib.auth.models import User
 
 from . models import Question
@@ -203,3 +204,10 @@ def restart_trivia(request):
 def logout(request):
     request.session.flush()
     return redirect('welcome')
+
+def chat_view(request):
+    answer = None
+    if request.method == 'POST':
+        prompt = request.POST.get('prompt')
+        answer = generate_response(prompt)
+    return render(request, 'chat.html', {'answer': answer})
