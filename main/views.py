@@ -12,6 +12,8 @@ from . forms import UserForm
 from . forms import ResetForm
 from . forms import ChangePasswordForm
 
+import json
+
 # Create your views here.
 
 def welcome(request):
@@ -208,6 +210,8 @@ def logout(request):
 def chat_view(request):
     answer = None
     if request.method == 'POST':
-        prompt = request.POST.get('prompt')
+        temp_prompt = request.POST.get('prompt')
+        prompt = f"Generate {temp_prompt} 10 question json with question, 4 option and correct option can be assigned to variable"
         answer = generate_response(prompt)
+        # print(answer)
     return render(request, 'chat.html', {'answer': answer})
