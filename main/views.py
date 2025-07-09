@@ -207,11 +207,30 @@ def logout(request):
     request.session.flush()
     return redirect('welcome')
 
+import  json
+import re
+
 def chat_view(request):
     answer = None
     if request.method == 'POST':
         temp_prompt = request.POST.get('prompt')
-        prompt = f"Generate {temp_prompt} 10 question json with question, 4 option and correct option can be assigned to variable"
-        answer = generate_response(prompt)
+        prompt = f"Generate {temp_prompt} 10 question json with question, 4 option and correct option can be assigned to variable. Format like before also questions:[question:, options:, correct_option:]"
+        answer = f'''{generate_response(prompt)}'''
+        cleaned_output = re.sub(r"```json|```", "", answer).strip()
+        try:
+            data = json.loads(cleaned_output)
+            quiz = data["questions"]
+            for item in quiz:
+                print("Q:", item["question"])
+                for i, option in enumerate(item["options"], 1):
+                    print(f"  {i}. {option}")
+                print("Answer:", item["correct_option"])
+            print()
+        except json.JSONDecodeError as e:
+            print("JSON decoding failed:", e)
         # print(answer)
     return render(request, 'chat.html', {'answer': answer})
+
+    
+    
+# answer = ''' ```json { "quiz": [ { "question": "What does CPU stand for?", "options": ["Central Processing Unit", "Computer Processing Unit", "Central Power Unit", "Computer Power Unit"], "correct_option": "Central Processing Unit" }, { "question": "What is the internet?", "options": ["A network of computers", "A type of computer", "A program", "A website"], "correct_option": "A network of computers" }, { "question": "What does RAM stand for?", "options": ["Random Access Memory", "Read Access Memory", "Randomly Accessed Memory", "Read-Only Memory"], "correct_option": "Random Access Memory" }, { "question": "Which of these is NOT an operating system?", "options": ["Windows", "macOS", "Google Chrome", "Linux"], "correct_option": "Google Chrome" }, { "question": "What is a browser?", "options": ["A type of computer", "A program for viewing websites", "A type of software", "A type of hardware"], "correct_option": "A program for viewing websites" }, { "question": "What does URL stand for?", "options": ["Uniform Resource Locator", "Universal Resource Locator", "Unified Resource Locator", "Unique Resource Locator"], "correct_option": "Uniform Resource Locator" }, { "question": "What is a file in a computer?", "options": ["A program", "A folder", "A piece of data", "A hardware component"], "correct_option": "A piece of data" }, { "question": "What is a password used for?", "options": ["To access your computer", "To protect your data", "To login to accounts", "All of the above"], "correct_option": "All of the above" }, { "question": "What does WWW stand for?", "options": ["World Wide Web", "Wonderful World Web", "Wide World Web", "World Web Wide"], "correct_option": "World Wide Web" }, { "question": "What is a computer virus?", "options": ["A type of program", "A harmful program", "A type of software", "A type of hardware"], "correct_option": "A harmful program" } ] } ```'''
