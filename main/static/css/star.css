@@ -34,7 +34,7 @@
 .star:nth-child(9)  { top: 90%; left: 90%; animation-delay: 0.6s; }
 .star:nth-child(10) { top: 5%;  left: 10%; animation-delay: 1.4s; }
 .star:nth-child(11)  { top: 20%; left: 40%; animation-delay: 0s; }
-.star:nth-child(12)  { top: 70%; left: 50%; animation-delay: 1s; }
+.star:nth-child(12)  { top: 70%; left: 80%; animation-delay: 1s; }
 .star:nth-child(13)  { top: 30%; left: 90%; animation-delay: 0.5s; }
 .star:nth-child(14)  { top: 10%; left: 60%; animation-delay: 1.5s; }
 .star:nth-child(15)  { top: 25%; left: 35%; animation-delay: 0.8s; }
