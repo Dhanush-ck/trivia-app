@@ -35,5 +35,6 @@ urlpatterns = [
     path('reset', views.reset_password, name='reset'),
     path('change', views.change_password, name='change'),
     path('logout', views.logout, name="logout"),
-    path('chat', views.chat_view, name="chat"),
+    path('ai', views.ai_view, name="ai"),
+    path('ai/trivia', views.ai_trivia, name="ai/trivia")
 ]
