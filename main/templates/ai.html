@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/ai.css' %}">
+    <link rel="stylesheet" href="{% static 'css/star.css' %}">
+    <title>AI</title>
+</head>
+<body>
+    <div class="container">
+        {% for i in "****************" %}
+            <div class="star"></div>
+        {% endfor %}
+        <form method="post" class="form">
+        {% csrf_token %}
+            <h1>Choose Level</h1>
+            <input type="text" placeholder="Enter category" class="category-input" name="category-input">
+            <div class="levels">
+                <span class="easy-button level-button checked">Easy</span>
+                <span class="medium-button level-button">Medium</span>
+                <span class="hard-button level-button">Hard</span>
+
+                <input type="radio" name="level" value='easy' class="easy level-radio-button" checked>
+                <input type="radio" name="level" value='medium' class="medium level-radio-button"> 
+                <input type="radio" name="level" value='hard' class="hard level-radio-button">
+            </div>
+            <button type="submit" class="button">Start</button>
+        </form>
+    </div>
+    <script src=" {% static "js/level.js" %} "></script>
+</body>
+</html>
