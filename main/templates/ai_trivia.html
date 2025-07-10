@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/ai_trivia.css" %}">
+    <link rel="stylesheet" href="{% static 'css/star.css' %}">
+    <title>Trivia</title>
+</head>
+<body>
+    <div class="container">
+        {% for i in "****************" %}
+            <div class="star"></div>
+        {% endfor %}
+        <div id="questions" data-questions=""></div>
+        <div class="form">
+            <p id="question"></p>
+            <div class="option-btn" data-value=""></div>
+            <div class="option-btn" data-value=""></div>
+            <div class="option-btn" data-value=""></div>
+            <div class="option-btn" data-value=""></div>
+            <button type="submit" value="0" name="option-btn" class="submit-button" onclick="next()">Next</button>
+        </div>
+        <form method="post" id="submission-form" >
+            {% csrf_token %}
+        </form>
+    </div>
+    <script id="questions-data" type="application/json">
+        {{ questions|safe }}
+    </script>
+    <script src="{% static "js/ai_trivia.js" %}"></script>
+</body>
+</html>
