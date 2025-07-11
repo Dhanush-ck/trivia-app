@@ -28,6 +28,11 @@
     gap: 4px;
 }
 
+.error {
+    color: red;
+    font-size: calc(100% - 4px);
+}
+
 .category-input {
     border: solid 1px black;
     padding: 8px;
