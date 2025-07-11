@@ -36,5 +36,6 @@ urlpatterns = [
     path('change', views.change_password, name='change'),
     path('logout', views.logout, name="logout"),
     path('ai', views.ai_view, name="ai"),
-    path('ai/trivia', views.ai_trivia, name="ai/trivia")
+    path('ai/trivia', views.ai_trivia, name="ai/trivia"),
+    path('ai/result', views.ai_result, name="ai/result"),
 ]
