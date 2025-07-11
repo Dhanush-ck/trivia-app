@@ -51,6 +51,10 @@ h1 {
     }
 }
 
+.ai:hover {
+    background-color: #9400D3;
+}
+
 a {
     text-decoration: none;
 }
