@@ -1,6 +1,3 @@
-// const questions = document.getElementById('questions').dataset.questions
-// const temp = JSON.parse(questions)
-// console.log(questions)
 
 const rawData = document.getElementById('questions-data').textContent;
 const quizData = JSON.parse(rawData);
@@ -8,16 +5,24 @@ const questions = quizData.questions;
 // console.log(questions[0].question)
 
 let currentIndex = 0;
+let score = 0;
 
 const question = document.getElementById('question');
 const options = document.querySelectorAll('.option-btn');
 const submitButton = document.querySelector('.submit-button');
+const submissionButton = document.getElementById('submission-button');
+submissionButton.dataset.value = 0
+console.log(submissionButton.dataset.value)
 
 let count;
 options.forEach((option)=>{
     option.addEventListener('click',()=>{
         if(option.dataset.value != questions[currentIndex].correct_option) {
             option.classList.add('false');
+        }
+        else {
+            ++score;
+            console.log(score);
         }
         options.forEach((e)=> {
             e.classList.add('disabled');
@@ -62,9 +67,11 @@ function setQuestion() {
 }
 
 function nextQuestion() {
-    if(currentIndex < 9) {
-        currentIndex++;
+    if(currentIndex > 8) {
+        submissionButton.value = score;
+        submissionButton.click();
     }
+    currentIndex++;
     setQuestion();
 }
 
