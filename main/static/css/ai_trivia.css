@@ -14,6 +14,10 @@
     background-color: #8f0fff;
 }
 
+#submission-form {
+    display: none;
+}
+
 .form {
     background-color: white;
     height: 30rem;
