@@ -233,7 +233,7 @@ def ai_view(request):
 def ai_trivia(request):
     if request.method == 'POST':
         score = request.POST.get('sbutton')
-        print(score)
+        # print(score)
         request.session['score'] = score
         return redirect('ai/result')
     return render(request, 'ai_trivia.html')
