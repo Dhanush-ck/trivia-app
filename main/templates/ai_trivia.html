@@ -22,10 +22,11 @@
             <div class="option-btn" data-value=""></div>
             <div class="option-btn" data-value=""></div>
             <div class="option-btn" data-value=""></div>
-            <button type="submit" value="0" name="option-btn" class="submit-button" onclick="next()">Next</button>
+            <button type="submit" name="option-btn" class="submit-button" onclick="next()">Next</button>
         </div>
-        <form method="post" id="submission-form" >
+        <form action="{% url "ai/trivia" %}" method="post" id="submission-form" >
             {% csrf_token %}
+            <button type="submit" id="submission-button" name="sbutton"></button>
         </form>
     </div>
     <script id="questions-data" type="application/json">
