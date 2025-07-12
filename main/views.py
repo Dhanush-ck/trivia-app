@@ -216,6 +216,7 @@ def ai_view(request):
         if category == "":
             error = "This field cannot be empty"
             return render(request, 'ai.html', {"error": error})
+        request.session['category'] = category
         level = request.POST.get('level')
         request.session['level'] = level
         prompt = f"Generate {level} {category} related 10 question json with question, 4 option and correct option can be assigned to variable. Format like before also questions:[question:, options:, correct_option:]"
@@ -241,9 +242,11 @@ def ai_trivia(request):
 def ai_result(request):
     score = request.session['score']
     level = request.session['level']
+    category = request.session['category']
     return render(request, 'result.html', {
         'score': score,
         'level': level,
+        'category': category,
         })
 
     
