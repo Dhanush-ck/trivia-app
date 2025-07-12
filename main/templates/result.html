@@ -18,6 +18,9 @@
         <div class="container-elements">
             <span class="score">Your score is </span>
             <h1>{{score}} / 10</h1>
+            {% if category %}
+                <span class="level">Category : {{category}} </span>
+            {% endif %}
             <span class="level">Difficulty : {{level}} </span>
             <form action="{% url 'restart' %}" method="post">
                 {% csrf_token %}
